@@ -4,8 +4,7 @@ export function momentFrom(params) {
   var time = window.moment(...params);
   var formatted = time.fromNow();
   return new Ember.Handlebars.SafeString(
-    '<span class="text-primary">'
-    + formatted + '</span>'
+    '<span class="text-primary">' + formatted + '</span>'
   );
 }
 
