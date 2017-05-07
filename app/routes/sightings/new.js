@@ -8,12 +8,23 @@ export default Ember.Route.extend({
       witnesses: this.store.findAll('witness')
     });
   },
+  sighting: Ember.computed.alias('controller.model.sighting'),
   actions: {
     willTransition() {
       var sighting = this.get('contoller.model.sighting');
       if(sighting.get('hasDirtyAttributes')){
         sighting.deleteRecord();
       }
+    },
+    create() {
+      var self = this;
+      this.get('sighting').save().then(function() {
+        self.transitionTo('sightings');
+      });
+    },
+    cancel() {
+      this.get('sighting').deleteRecord();
+      this.transitionToRoute('sightings');
     }
   }
 });
